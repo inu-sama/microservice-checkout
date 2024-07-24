@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 
 export default function VoucherList({ setDiscount }) {
   const [voucher, setVoucher] = useState([]);
-  const [selection, setSelection] = useState(null);
+  const [selection, setSelection] = useState();
+  // const [info, setInfo] = useState();
   useEffect(() => {
     (async () => {
       try {
@@ -13,7 +14,6 @@ export default function VoucherList({ setDiscount }) {
             // headers: {
             //   "Content-Type": "application/json",
             // },
-            //   body: JSON.stringify(danhsachsanbay),
           }
         );
         const data = await response.json();
@@ -31,20 +31,23 @@ export default function VoucherList({ setDiscount }) {
         <summary className="cursor-pointer w-full rounded-t-md border-4 border-green-400 text-green-400">
           Chọn voucher
         </summary>
-        <ul className="absolute top-7 menu dropdown-content bg-white rounded-box z-[99] w-full py-2 rounded-b-md border-2 border-green-400 shadow">
+        <ul className="absolute top-7 menu dropdown-content bg-white rounded-box z-[99] w-full rounded-b-md border-2 border-green-400 shadow">
           {voucher.map((item) => {
             return (
               <li key={item._id}>
                 <div
-                  className="group grid grid-cols-12 hover:bg-green-400 hover:text-white
-                    cursor-pointer place-items-center dropdown"
+                  className="group grid grid-cols-12 hover:bg-green-400 hover:text-white cursor-pointer place-items-center px-16"
                   onClick={() => {
                     setSelection(item);
                     setDiscount(item.VoucherDiscount);
                   }}
                 >
                   <div className="col-span-3 p-2">
-                    <img src={item.VoucherImage} alt="" className="img-fluid" />
+                    <img
+                      src={item.VoucherImage}
+                      alt=""
+                      className="img-fluid rounded"
+                    />
                   </div>
                   <div className="col-span-8 border-3 border-black text-left">
                     <p className="font-bold text-green-400 text-lg group-hover:text-white">
@@ -75,16 +78,55 @@ export default function VoucherList({ setDiscount }) {
                       </button>
                     </form>
                     <div className="modal-box">
-                      <h3 className="font-bold text-lg">{item.VoucherName}</h3>
+                      <h3 className="font-bold text-4xl text-green-600 my-3">
+                        {item.VoucherName}
+                      </h3>
                       <div className="grid grid-cols-12 place-items-center">
                         <div className="col-span-4">
                           <img
                             src={item.VoucherImage}
                             alt=""
-                            className="img-fluid"
+                            className="img-fluid rounded"
                           />
                         </div>
-                        {/* <div className="col-span-8"></div> */}
+                        <div className="grid col-span-8 text-left place-items-start w-full px-10">
+                          <p>
+                            <span className="font-bold text-green-600">
+                              Mã:
+                            </span>{" "}
+                            {item.VoucherID}
+                          </p>
+                          <p>
+                            <span className="font-bold text-green-600">
+                              Hạn sử dụng:
+                            </span>{" "}
+                            {item.VoucherEndDate}
+                          </p>
+                          <p>
+                            <span className="font-bold text-green-600">
+                              Mức giảm:
+                            </span>{" "}
+                            {item.VoucherDiscount}%
+                          </p>
+                          <p>
+                            <span className="font-bold text-green-600">
+                              Giảm tối đa:
+                            </span>{" "}
+                            {item.VoucherMaxValue}đ
+                          </p>
+                          <p>
+                            <span className="font-bold text-green-600">
+                              Giá trị đơn hàng tối thiểu:
+                            </span>{" "}
+                            {item.VoucherMinValue}đ
+                          </p>
+                          <p>
+                            <span className="font-bold text-green-600">
+                              Mô tả:
+                            </span>{" "}
+                            {item.VoucherDescription}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </dialog>
@@ -98,9 +140,14 @@ export default function VoucherList({ setDiscount }) {
       {selection ? (
         <div className="grid grid-cols-12 cursor-pointer mt-2 mb-10">
           <div className="col-span-3">
-            <img src={selection.VoucherImage} alt="" className="img-fluid" />
+            <img
+              src={selection.VoucherImage}
+              alt=""
+              className="img-fluid rounded"
+            />
           </div>
-          <div className="col-span-8 border-3 border-black text-left">
+          <div className="col-span-2"></div>
+          <div className="col-span-7 border-3 border-black text-left">
             <p className="font-bold text-green-400 text-lg">
               {selection.VoucherName}
             </p>
@@ -111,7 +158,6 @@ export default function VoucherList({ setDiscount }) {
             </p>
             <p>Tối đa {selection.VoucherMaxValue}</p>
           </div>
-          <div className="col-span-1"></div>
         </div>
       ) : null}
     </div>

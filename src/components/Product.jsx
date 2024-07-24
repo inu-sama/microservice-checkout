@@ -30,7 +30,7 @@ export default function Product({ setPrice }) {
   return (
     <>
       {datXeOto.map((datXe) => {
-        total += datXe.ThanhTien * datXe.SoLuongHanhKhach;
+        total += datXe.ThanhTien;
         // useEffect(() => {
         setPrice(total);
         // }, []);
