@@ -79,12 +79,12 @@ export default function VoucherList({ setDiscount }) {
                     </form>
                     <div className="modal-box">
                       <h3 className="font-bold text-4xl text-green-600 my-3">
-                        {item.VoucherName}
+                        {selection.VoucherName}
                       </h3>
                       <div className="grid grid-cols-12 place-items-center">
                         <div className="col-span-4">
                           <img
-                            src={item.VoucherImage}
+                            src={selection.VoucherImage}
                             alt=""
                             className="img-fluid rounded"
                           />
@@ -94,37 +94,38 @@ export default function VoucherList({ setDiscount }) {
                             <span className="font-bold text-green-600">
                               Mã:
                             </span>{" "}
-                            {item.VoucherID}
+                            {selection.VoucherID}
                           </p>
                           <p>
                             <span className="font-bold text-green-600">
                               Hạn sử dụng:
                             </span>{" "}
-                            {item.VoucherEndDate}
+                            {selection.VoucherEndDate}
                           </p>
                           <p>
                             <span className="font-bold text-green-600">
                               Mức giảm:
                             </span>{" "}
-                            {item.VoucherDiscount}%
+                            {selection.VoucherDiscount}%
                           </p>
                           <p>
                             <span className="font-bold text-green-600">
                               Giảm tối đa:
                             </span>{" "}
-                            {item.VoucherMaxValue}đ
+                            {selection.VoucherMaxValue}đ
                           </p>
+                          s
                           <p>
                             <span className="font-bold text-green-600">
                               Giá trị đơn hàng tối thiểu:
                             </span>{" "}
-                            {item.VoucherMinValue}đ
+                            {selection.VoucherMinValue}đ
                           </p>
                           <p>
                             <span className="font-bold text-green-600">
                               Mô tả:
                             </span>{" "}
-                            {item.VoucherDescription}
+                            {selection.VoucherDescription}
                           </p>
                         </div>
                       </div>
