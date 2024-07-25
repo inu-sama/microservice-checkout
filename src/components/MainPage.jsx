@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Product from "./Product";
 import VoucherList from "./VoucherList";
 
 export default function MainPage() {
+  const { id } = useParams();
   const [price, setPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
   const final = price - (price * discount) / 100;
@@ -26,7 +28,7 @@ export default function MainPage() {
               <p>Giá</p>
             </div>
           </div>
-          <Product setPrice={setPrice} />
+          <Product setPrice={setPrice} id={id} />
         </div>
         <div className="bg-white col-span-5 shadow-xl rounded-lg my-10 p-3 px-10 m-0 h-fit">
           <VoucherList setDiscount={setDiscount} />

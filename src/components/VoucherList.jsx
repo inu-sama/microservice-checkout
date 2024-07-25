@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-export default function VoucherList({ setDiscount }) {
+export default function VoucherList(props) {
   const [voucher, setVoucher] = useState([]);
-  const [selection, setSelection] = useState();
+  const [selection, setSelection] = useState({});
   // const [info, setInfo] = useState();
   useEffect(() => {
     (async () => {
@@ -10,7 +10,7 @@ export default function VoucherList({ setDiscount }) {
         const response = await fetch(
           "https://voucher-server-akuy.vercel.app/api/vouchers/getVoucher",
           {
-            method: "POST",
+            method: "GET",
             // headers: {
             //   "Content-Type": "application/json",
             // },
@@ -39,7 +39,7 @@ export default function VoucherList({ setDiscount }) {
                   className="group grid grid-cols-12 hover:bg-green-400 hover:text-white cursor-pointer place-items-center px-16"
                   onClick={() => {
                     setSelection(item);
-                    setDiscount(item.VoucherDiscount);
+                    props.setDiscount(item.VoucherDiscount);
                   }}
                 >
                   <div className="col-span-3 p-2">
