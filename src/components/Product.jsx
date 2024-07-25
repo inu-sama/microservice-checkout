@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useSearchParams, useLocation } from "react-router-dom";
 import ProductData from "../data/ProductData";
 import MainPage from "./MainPage";
 
 export default function Product({ setPrice }) {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get("service");
+  const queryCheckout = searchParams.get("checkoutid");
+  useEffect(() => {
+    console.log(query);
+    console.log(queryCheckout);
+  });
   const [datXe, setDatXeOto] = useState([]);
   const [quantity, setQuantity] = useState(1);
   useEffect(() => {
@@ -10,7 +19,8 @@ export default function Product({ setPrice }) {
       try {
         const response = await fetch(
           // "https://cnpm-api-thanh-3cf82c42b226.herokuapp.com/api/GetDatXeOto",
-          "https://cnpm-api-thanh-3cf82c42b226.herokuapp.com/api/FindBookingCarID/669f3567087ce4f213f767a8",
+          "https://cnpm-api-thanh-3cf82c42b226.herokuapp.com/api/FindBookingCarID/" +
+            queryCheckout,
           {
             method: "POST",
             // headers: {

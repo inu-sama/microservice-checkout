@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import MainPage from "./components/MainPage";
 import DanhSachSanBay from "./components/DanhSachSanBay";
@@ -12,9 +13,11 @@ function App() {
 
   return (
     <div className="font-sans">
-      <Header />
-      <MainPage />
-      <Footer />
+      <Router>
+        <Header />
+        <MainPage />
+        <Footer />
+      </Router>
     </div>
   );
 }
