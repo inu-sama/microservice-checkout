@@ -13,7 +13,11 @@ export default function Product({ setPrice }) {
     console.log(queryCheckout);
   });
   const [datXe, setDatXeOto] = useState([]);
+  window.open(
+    "http://localhost:5173/?service=abc&checkoutid=669f3567087ce4f213f767a8"
+  );
   const [quantity, setQuantity] = useState(1);
+
   useEffect(() => {
     (async () => {
       try {
