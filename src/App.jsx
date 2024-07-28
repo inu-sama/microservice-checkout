@@ -15,9 +15,6 @@ function App() {
   return (
     <div className="font-sans">
       <Router>
-        {/* <Header />
-        <MainPage />
-        <Footer /> */}
         <Testing />
       </Router>
     </div>
