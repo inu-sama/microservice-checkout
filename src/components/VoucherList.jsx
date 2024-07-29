@@ -28,7 +28,7 @@ export default function VoucherList(props) {
   return (
     <div>
       <details className="dropdown relative">
-        <summary className="cursor-pointer w-full rounded-t-md border-4 border-green-400 text-green-400">
+        <summary className="cursor-pointer w-full rounded-md border-4 border-green-400 text-green-400">
           Chọn voucher
         </summary>
         <ul className="absolute top-7 menu dropdown-content bg-white rounded-box z-[99] w-full rounded-b-md border-2 border-green-400 shadow">
@@ -114,7 +114,6 @@ export default function VoucherList(props) {
                             </span>{" "}
                             {selection.VoucherMaxValue}đ
                           </p>
-                          s
                           <p>
                             <span className="font-bold text-green-600">
                               Giá trị đơn hàng tối thiểu:
