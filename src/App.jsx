@@ -7,12 +7,13 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Testing from "./components/Testing";
+import VoucherList from "./components/VoucherList";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="font-sans">
+    <div className="h-full">
       <Router>
         <Testing />
       </Router>
