@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useSearchParams, useLocation } from "react-router-dom";
-import ProductData from "../data/ProductData";
+import ProductData from "./data/ProductData";
 import MainPage from "./MainPage";
 
 export default function Product({ setPrice }) {

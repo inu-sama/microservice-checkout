@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 export default function VoucherList(props) {
   const [voucher, setVoucher] = useState([]);
   const [selection, setSelection] = useState({});
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -27,7 +26,6 @@ export default function VoucherList(props) {
   const handleVoucherClick = (item) => {
     setSelection(item);
     props.setDiscount(item.VoucherDiscount);
-    setIsDropdownOpen(false); // Đóng dropdown khi chọn voucher
   };
 
   const formatDate = (dateString) => {
@@ -41,11 +39,7 @@ export default function VoucherList(props) {
 
   return (
     <div>
-      <details
-        className="dropdown relative"
-        open={isDropdownOpen}
-        onToggle={() => setIsDropdownOpen(!isDropdownOpen)}
-      >
+      <details className="dropdown relative">
         <summary className="cursor-pointer text-xl w-full rounded-md text-pink-400">
           Chọn voucher
         </summary>
