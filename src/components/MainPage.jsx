@@ -37,7 +37,7 @@ export default function MainPage() {
               <p>{service}</p>
             </div>
           </div>
-          {/* <VoucherList setDiscount={setDiscount} /> */}
+          <VoucherList setDiscount={setDiscount} />
           <Product setPrice={setPrice} />
           <div className="grid grid-cols-2">
             <div className="font-bold text-left px-10">
