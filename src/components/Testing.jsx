@@ -8,22 +8,22 @@ export default function Testing() {
   const [partner, setPartner] = useState({});
   const [discount, setDiscount] = useState(0);
   const orderId = searchParams.get("OrderID") || "";
+  const partnerId = searchParams.get("PartnerID") || "";
 
   useEffect(() => {
     (async () => {
       try {
         const responseOrder = await fetch(
-          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
-          `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
+          `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
+          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
           {
             method: "POST",
           }
         );
         const responsePartner = await fetch(
-          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
-          `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
+          `https://api.htilssu.com/api/v1/partner/all`,
           {
-            method: "POST",
+            method: "GET",
             headers: {
               "X-Api":
                 "088ceabd98a514383c78e153c1442165a92600c4366580eb377791b5ff4b622a",
@@ -48,7 +48,7 @@ export default function Testing() {
   };
 
   return (
-    <div className="border border-pink-200 rounded-lg mx-auto h-fit bg-gradient-to-b text-left from-pink-300 px-40">
+    <div className="border border-pink-200 rounded-lg mx-auto h-fit bg-gradient-to-b text-left from-pink-400 px-40">
       <h1 className="text-4xl text-center text-white font-bold my-12">
         THANH TOÁN
       </h1>
