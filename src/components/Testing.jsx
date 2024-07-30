@@ -58,23 +58,27 @@ export default function Testing() {
         </p>
         <div className="py-4 shadow-md shadow-pink-300 mx-2 px-4 rounded-md grid grid-cols-12 gap-4">
           <div className="col-span-3 text-xl text-slate-500">Mã Đơn Hàng:</div>
-          <div className="col-span-3 text-xl px-2">{thanhtoan.OrderID}</div>
+          <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
+            {thanhtoan.OrderID}
+          </div>
           <div className="col-span-3 text-xl text-slate-500">Tên dịch vụ:</div>
-          <div className="col-span-3 text-xl px-2">{thanhtoan.ServiceName}</div>
+          <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
+            {thanhtoan.ServiceName}
+          </div>
           <div className="col-span-3 text-xl text-slate-500">
             Mã Khách hàng:{" "}
           </div>
-          <div className="col-span-3 text-xl px-2">
+          <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
             {thanhtoan.CustomerCode}
           </div>
           <div className="col-span-3 text-xl text-slate-500">
             Tên khách hàng:{" "}
           </div>
-          <div className="col-span-3 text-xl px-2">
+          <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
             {thanhtoan.CustomerName}
           </div>
           <div className="col-span-3 text-xl text-slate-500">Mô tả: </div>
-          <div className="col-span-12 text-xl px-2">
+          <div className="col-span-9 text-xl px-2 overflow-scroll scrollbar-hide">
             {thanhtoan.Description}
           </div>
         </div>
