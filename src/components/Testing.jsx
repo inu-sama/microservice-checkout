@@ -62,15 +62,13 @@ export default function Testing() {
             {thanhtoan.OrderID}
           </div>
           <div className="col-span-3 text-xl text-slate-500">Nhà cung cấp:</div>
-          {partner.map((item) => {
-            if (item.PartnerID === thanhtoan.PartnerID) {
-              return (
-                <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
-                  {item.name}
-                </div>
-              );
-            }
-          })}
+          <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
+            {partner.map((item) => {
+              if (item.PartnerID === thanhtoan.PartnerID) {
+                return item.name;
+              }
+            })}
+          </div>
           <div className="col-span-3 text-xl text-slate-500">Tên dịch vụ:</div>
           <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
             {thanhtoan.ServiceName}
