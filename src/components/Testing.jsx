@@ -13,6 +13,7 @@ export default function Testing() {
       try {
         const response = await fetch(
           `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
+          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
           {
             method: "POST",
           }
@@ -45,7 +46,7 @@ export default function Testing() {
         <div className="py-4 shadow-md shadow-pink-300 mx-2 px-4 rounded-md grid grid-cols-2">
           <div className="flex py-4">
             <span className="text-xl text-slate-500">Mã Đơn Hàng:</span>
-            <span className="text-xl px-2">{thanhtoan.ServiceCode}</span>
+            <span className="text-xl px-2">{thanhtoan.OrderID}</span>
           </div>
           <div className="flex py-4">
             <span className="text-xl text-slate-500">Tên dịch vụ:</span>
