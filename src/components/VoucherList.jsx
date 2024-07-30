@@ -170,7 +170,7 @@ import { useState, useEffect } from "react";
 
 export default function VoucherList(props) {
   const [voucher, setVoucher] = useState([]);
-  const [selection, setSelection] = useState({});
+  const [selection, setSelection] = useState();
   // setSelection(null);
 
   useEffect(() => {
@@ -237,75 +237,6 @@ export default function VoucherList(props) {
                   </p>
                   <p>Tối đa {item.VoucherMaxValue}</p>
                 </div>
-                <div
-                  className="btn col-span-1 text-4xl text-pink-400 group-hover:text-white cursor-help"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    document.getElementById("voucher_detail").showModal();
-                  }}
-                >
-                  🛈
-                </div>
-                <dialog
-                  id="voucher_detail"
-                  className="modal p-5 pb-16 rounded-2xl w-1/2"
-                >
-                  <form method="dialog" className="modal-backdrop">
-                    <button className="w-full text-pink-400 text-right text-4xl px-2">
-                      🗙
-                    </button>
-                  </form>
-                  <div className="modal-box">
-                    <h3 className="font-bold text-4xl text-pink-600 my-3">
-                      {selection.VoucherName}
-                    </h3>
-                    <div className="grid grid-cols-12 place-items-center">
-                      <div className="col-span-4">
-                        <img
-                          src={selection.VoucherImage}
-                          alt=""
-                          className="img-fluid rounded"
-                        />
-                      </div>
-                      <div className="grid col-span-8 text-left place-items-start w-full px-10">
-                        <p>
-                          <span className="font-bold text-pink-600">Mã:</span>{" "}
-                          {selection.VoucherID}
-                        </p>
-                        <p>
-                          <span className="font-bold text-pink-600">
-                            Hạn sử dụng:
-                          </span>{" "}
-                          {formatDate(selection.VoucherEndDate)}
-                        </p>
-                        <p>
-                          <span className="font-bold text-pink-600">
-                            Mức giảm:
-                          </span>{" "}
-                          {selection.VoucherDiscount}%
-                        </p>
-                        <p>
-                          <span className="font-bold text-pink-600">
-                            Giảm tối đa:
-                          </span>{" "}
-                          {selection.VoucherMaxValue}đ
-                        </p>
-                        <p>
-                          <span className="font-bold text-pink-600">
-                            Giá trị đơn hàng tối thiểu:
-                          </span>{" "}
-                          {selection.VoucherMinValue}đ
-                        </p>
-                        <p>
-                          <span className="font-bold text-pink-600">
-                            Mô tả:
-                          </span>{" "}
-                          {selection.VoucherDescription}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </dialog>
               </div>
             </li>
           ))}
@@ -323,7 +254,7 @@ export default function VoucherList(props) {
               className="img-fluid rounded-lg"
             />
           </div>
-          <div className="col-span-2"></div>
+          <div className="col-span-1"></div>
           <div className="col-span-7 border-3 border-black text-left">
             <p className="font-bold text-3xl text-pink-300 mb-2">
               {selection.VoucherName}
@@ -337,6 +268,71 @@ export default function VoucherList(props) {
             </p>
             <p className="text-xl py-2">Tối đa {selection.VoucherMaxValue}</p>
           </div>
+          <div
+            className="btn col-span-1 text-4xl text-pink-400 group-hover:text-white cursor-help place-self-center"
+            onClick={(e) => {
+              e.stopPropagation();
+              document.getElementById("voucher_detail").showModal();
+            }}
+          >
+            🛈
+          </div>
+          <dialog
+            id="voucher_detail"
+            className="modal p-5 pb-16 rounded-2xl w-1/2"
+          >
+            <form method="dialog" className="modal-backdrop">
+              <button className="w-full text-pink-400 text-right text-4xl px-2">
+                🗙
+              </button>
+            </form>
+            <div className="modal-box">
+              <h3 className="font-bold text-4xl text-pink-600 my-3">
+                {selection.VoucherName}
+              </h3>
+              <div className="grid grid-cols-12 place-items-center">
+                <div className="col-span-4">
+                  <img
+                    src={selection.VoucherImage}
+                    alt=""
+                    className="img-fluid rounded"
+                  />
+                </div>
+                <div className="grid col-span-8 text-left place-items-start w-full px-10">
+                  <p>
+                    <span className="font-bold text-pink-600">Mã:</span>{" "}
+                    {selection.VoucherID}
+                  </p>
+                  <p>
+                    <span className="font-bold text-pink-600">
+                      Hạn sử dụng:
+                    </span>{" "}
+                    {formatDate(selection.VoucherEndDate)}
+                  </p>
+                  <p>
+                    <span className="font-bold text-pink-600">Mức giảm:</span>{" "}
+                    {selection.VoucherDiscount}%
+                  </p>
+                  <p>
+                    <span className="font-bold text-pink-600">
+                      Giảm tối đa:
+                    </span>{" "}
+                    {selection.VoucherMaxValue}đ
+                  </p>
+                  <p>
+                    <span className="font-bold text-pink-600">
+                      Giá trị đơn hàng tối thiểu:
+                    </span>{" "}
+                    {selection.VoucherMinValue}đ
+                  </p>
+                  <p>
+                    <span className="font-bold text-pink-600">Mô tả:</span>{" "}
+                    {selection.VoucherDescription}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </dialog>
         </div>
       ) : null}
     </div>

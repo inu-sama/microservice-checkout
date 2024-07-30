@@ -5,22 +5,37 @@ import { useSearchParams } from "react-router-dom";
 export default function Testing() {
   const [searchParams] = useSearchParams();
   const [thanhtoan, setThanhtoan] = useState({});
+  const [partner, setPartner] = useState({});
   const [discount, setDiscount] = useState(0);
   const orderId = searchParams.get("OrderID") || "";
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(
-          `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
-          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
+        const responseOrder = await fetch(
+          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
+          `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
           {
             method: "POST",
           }
         );
-        const data = await response.json();
+        const responsePartner = await fetch(
+          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
+          `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
+          {
+            method: "POST",
+            headers: {
+              "X-Api":
+                "088ceabd98a514383c78e153c1442165a92600c4366580eb377791b5ff4b622a",
+            },
+          }
+        );
+        const data = await responseOrder.json();
+        const dataPartner = await responsePartner.json();
         setThanhtoan(data.partNerRequest || {});
+        setPartner(dataPartner || {});
         console.log(data.partNerRequest);
+        console.log(dataPartner);
       } catch {
         console.error("Error fetching data");
       }
@@ -33,14 +48,12 @@ export default function Testing() {
   };
 
   return (
-    <div className="border border-pink-200 rounded-lg mx-auto h-fit bg-gradient-to-b text-left p-4 from-pink-300 py-6 px-10">
-      <div className="h-full">
-        <h1 className="text-4xl text-center text-white font-bold">
-          THANH TOÁN
-        </h1>
-      </div>
+    <div className="border border-pink-200 rounded-lg mx-auto h-fit bg-gradient-to-b text-left from-pink-300 px-40">
+      <h1 className="text-4xl text-center text-white font-bold my-12">
+        THANH TOÁN
+      </h1>
       <div className="bg-white p-6 mb-6 w-full mt-4 mx-auto rounded-xl ">
-        <p className="text-center p-4 text-2xl font-bold text-pink-300">
+        <p className="text-left p-4 text-2xl font-bold text-pink-300">
           Thông tin đơn hàng
         </p>
         <div className="py-4 shadow-md shadow-pink-300 mx-2 px-4 rounded-md grid grid-cols-2">
@@ -72,38 +85,28 @@ export default function Testing() {
         <div className="py-4 shadow-md shadow-pink-300 mx-2 px-4 mt-12 rounded-md">
           <VoucherList setDiscount={setDiscount} />
         </div>
-        <p className="text-center p-4 text-2xl font-bold text-pink-300 mt-12">
+        <p className="text-left p-4 text-2xl font-bold text-pink-300 mt-12">
           Bảng thanh toán
         </p>
-        <div className="py-4 shadow-md shadow-pink-300 mx-2 px-4 grid grid-cols-2 rounded-md">
-          <div>
-            <div className="flex py-4">
-              <span className="text-xl text-slate-500">Tổng tiền:</span>
-              <span className="text-xl px-2">{thanhtoan.TotalMoney}</span>
-            </div>
-            <div className="flex py-4">
-              <span className="text-xl text-slate-500">Giảm giá:</span>
-              <span className="text-xl px-2">{discount}%</span>
-            </div>
-            <div className="flex py-4">
-              <span className="text-xl text-slate-500">Tổng cộng: </span>
-              <span className="text-xl px-2">{calculateTotal()}đ</span>
-            </div>
+        <div className="py-8 shadow-md shadow-pink-300 mx-2 px-4 grid grid-cols-12 rounded-md gap-4">
+          <div className="col-span-3 text-xl text-slate-500 place-self-end">
+            Mức giảm:
           </div>
-          <div>
-            <div className="flex py-4">
-              <span className="text-xl text-slate-500">Thuế:</span>
-              <span className="text-xl px-2">{thanhtoan.Tax}</span>
-            </div>
-            <div className="flex py-4">
-              <span className="text-xl text-slate-500">Triết khấu:</span>
-              <span className="text-xl px-2">{thanhtoan.Discount}</span>
-            </div>
-            <div className="flex py-4">
-              <span className="text-xl text-slate-500">bala bala: </span>
-              <span className="text-xl px-2">{thanhtoan.BalaBala}</span>
-            </div>
+          <div className="col-span-3 text-xl px-2">{discount}%</div>
+          <div className="col-span-3 text-xl text-slate-500 place-self-end">
+            Số tiền được giảm:
           </div>
+          <div className="col-span-3 text-xl px-2">
+            {(discount * thanhtoan.TotalMoney) / 100}đ
+          </div>
+          <div className="col-span-3 text-xl text-slate-500 place-self-end">
+            Tạm tính:
+          </div>
+          <div className="col-span-3 text-xl px-2">{thanhtoan.TotalMoney}đ</div>
+          <div className="col-span-3 font-bold text-xl text-slate-500 place-self-end">
+            Tổng tiền:
+          </div>
+          <div className="col-span-3 text-xl px-2">{calculateTotal()}đ</div>
         </div>
       </div>
       <div className="text-center mt-4">
