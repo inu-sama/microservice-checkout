@@ -48,7 +48,7 @@ export default function Testing() {
   };
 
   return (
-    <div className="border border-pink-200 rounded-lg mx-auto h-fit bg-gradient-to-b text-left from-pink-400 px-40">
+    <div className=" rounded-xl h-fit bg-gradient-to-b text-left from-pink-400 px-40 my-12 mx-40 pt-12">
       <h1 className="text-4xl text-center text-white font-bold my-12">
         THANH TOÁN
       </h1>
@@ -56,30 +56,26 @@ export default function Testing() {
         <p className="text-left p-4 text-2xl font-bold text-pink-300">
           Thông tin đơn hàng
         </p>
-        <div className="py-4 shadow-md shadow-pink-300 mx-2 px-4 rounded-md grid grid-cols-2">
-          <div className="flex py-4">
-            <span className="text-xl text-slate-500">Mã Đơn Hàng:</span>
-            <span className="text-xl px-2">{thanhtoan.OrderID}</span>
+        <div className="py-4 shadow-md shadow-pink-300 mx-2 px-4 rounded-md grid grid-cols-12 gap-4">
+          <div className="col-span-3 text-xl text-slate-500">Mã Đơn Hàng:</div>
+          <div className="col-span-3 text-xl px-2">{thanhtoan.OrderID}</div>
+          <div className="col-span-3 text-xl text-slate-500">Tên dịch vụ:</div>
+          <div className="col-span-3 text-xl px-2">{thanhtoan.ServiceName}</div>
+          <div className="col-span-3 text-xl text-slate-500">
+            Mã Khách hàng:{" "}
           </div>
-          <div className="flex py-4">
-            <span className="text-xl text-slate-500">Tên dịch vụ:</span>
-            <span className="text-xl px-2">{thanhtoan.ServiceName}</span>
+          <div className="col-span-3 text-xl px-2">
+            {thanhtoan.CustomerCode}
           </div>
-          <div className="flex py-4">
-            <span className="text-xl text-slate-500">Tên công ty: </span>
-            <span className="text-xl px-2">{thanhtoan.PartnerName}</span>
+          <div className="col-span-3 text-xl text-slate-500">
+            Tên khách hàng:{" "}
           </div>
-          <div className="flex py-4">
-            <span className="text-xl text-slate-500">Mã Khách hàng: </span>
-            <span className="text-xl px-2">{thanhtoan.CustomerCode}</span>
+          <div className="col-span-3 text-xl px-2">
+            {thanhtoan.CustomerName}
           </div>
-          <div className="flex py-4">
-            <span className="text-xl text-slate-500">Tên khách hàng: </span>
-            <span className="text-xl px-2">{thanhtoan.CustomerName}</span>
-          </div>
-          <div className="flex py-4">
-            <span className="text-xl text-slate-500">Mô tả: </span>
-            <span className="text-xl px-2">{thanhtoan.Description}</span>
+          <div className="col-span-3 text-xl text-slate-500">Mô tả: </div>
+          <div className="col-span-12 text-xl px-2">
+            {thanhtoan.Description}
           </div>
         </div>
         <div className="py-4 shadow-md shadow-pink-300 mx-2 px-4 mt-12 rounded-md">
