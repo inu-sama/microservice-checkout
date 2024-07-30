@@ -5,17 +5,17 @@ import { useSearchParams } from "react-router-dom";
 export default function Testing() {
   const [searchParams] = useSearchParams();
   const [thanhtoan, setThanhtoan] = useState({});
-  const [partner, setPartner] = useState({});
+  const [partner, setPartner] = useState([]);
   const [discount, setDiscount] = useState(0);
   const orderId = searchParams.get("OrderID") || "";
-  const partnerId = searchParams.get("PartnerID") || "";
+  // const partnerId = searchParams.get("PartnerID") || "";
 
   useEffect(() => {
     (async () => {
       try {
         const responseOrder = await fetch(
-          `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
-          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
+          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
+          `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
           {
             method: "POST",
           }
@@ -58,9 +58,19 @@ export default function Testing() {
         </p>
         <div className="py-4 shadow-md shadow-pink-300 mx-2 px-4 rounded-md grid grid-cols-12 gap-4">
           <div className="col-span-3 text-xl text-slate-500">Mã Đơn Hàng:</div>
-          <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
+          <div className="col-span-9 text-xl px-2 overflow-scroll scrollbar-hide">
             {thanhtoan.OrderID}
           </div>
+          <div className="col-span-3 text-xl text-slate-500">Nhà cung cấp:</div>
+          {partner.map((item) => {
+            if (item.PartnerID === thanhtoan.PartnerID) {
+              return (
+                <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
+                  {item.name}
+                </div>
+              );
+            }
+          })}
           <div className="col-span-3 text-xl text-slate-500">Tên dịch vụ:</div>
           <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
             {thanhtoan.ServiceName}
