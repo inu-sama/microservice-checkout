@@ -64,7 +64,7 @@ export default function Testing() {
           <div className="col-span-3 text-xl text-slate-500">Nhà cung cấp:</div>
           <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
             {partner.map((item) => {
-              if (item.PartnerID === thanhtoan.PartnerID) {
+              if (item.id === thanhtoan.PartnerID) {
                 return item.name;
               }
             })}
