@@ -27,7 +27,8 @@ export default function Testing() {
           {
             method: "GET",
             headers: {
-              "X-Api": partner.apiKey,
+              "X-Api":
+                "088ceabd98a514383c78e153c1442165a92600c4366580eb377791b5ff4b622a",
             },
           }
         );
@@ -104,13 +105,11 @@ export default function Testing() {
           </div>
           <div className="col-span-3 text-xl text-slate-500">Nhà cung cấp:</div>
           <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
-            {() => {
-              partner.map((item) => {
-                if (item.id === thanhtoan.PartnerID) {
-                  return item.name.toUpperCase();
-                }
-              });
-            }}
+            {partner.map((item) => {
+              if (item.id === thanhtoan.PartnerID) {
+                return item.name.toUpperCase();
+              }
+            })}
           </div>
           <div className="col-span-3 text-xl text-slate-500">Tên dịch vụ:</div>
           <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
