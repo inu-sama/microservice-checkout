@@ -76,8 +76,8 @@ export default function Testing() {
         throw new Error("Network response was not ok");
       }
       const result = await res.json();
-      // window.location.href = `https://htilssu.com/servicepayment/${result.id}`;
-      window.open(`https://htilssu.com/servicepayment/${result.id}`);
+      window.location.href = `https://htilssu.com/servicepayment/${result.id}`;
+      // window.open(`https://htilssu.com/servicepayment/${result.id}`);
     } catch (error) {
       console.error("Error fetching data", error);
     }
