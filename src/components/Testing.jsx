@@ -44,7 +44,7 @@ export default function Testing() {
         throw new Error("Network response was not ok");
       }
       const result = await res.json();
-      setVoucher(result || []);
+      setVoucher((e) => result);
     } catch (error) {
       console.error("Error fetching data", error);
     }
