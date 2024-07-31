@@ -65,7 +65,7 @@ export default function Testing() {
           <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
             {partner.map((item) => {
               if (item.id === thanhtoan.PartnerID) {
-                return item.name;
+                return item.name.toUpperCase();
               }
             })}
           </div>

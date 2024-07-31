@@ -55,7 +55,7 @@ export default function VoucherList(props) {
                   <img
                     src={item.VoucherImage}
                     alt=""
-                    className="img-fluid rounded"
+                    className="img-fluid rounded h-20"
                   />
                 </div>
                 <div className="col-span-1"></div>
@@ -80,15 +80,15 @@ export default function VoucherList(props) {
       </p>
       {selection ? (
         <div className="grid grid-cols-12 cursor-pointer mt-2 mb-10 text-slate-500">
-          <div className="col-span-3">
+          <div className="col-span-3 p-2">
             <img
               src={selection.VoucherImage}
               alt=""
-              className="img-fluid rounded-lg"
+              className="img-fluid rounded-lg h-40"
             />
           </div>
-          <div className="col-span-1"></div>
-          <div className="col-span-7 border-3 border-black text-left">
+          {/* <div className="col-span-1"></div> */}
+          <div className="col-span-8 border-3 border-black text-left">
             <p className="font-bold text-3xl text-pink-300 mb-2">
               {selection.VoucherName}
             </p>
