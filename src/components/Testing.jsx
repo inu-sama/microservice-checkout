@@ -12,6 +12,37 @@ export default function Testing() {
   const orderId = searchParams.get("OrderID") || "";
   // const partnerId = searchParams.get("PartnerID") || "";
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const responseOrder = await fetch(
+          `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
+          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
+          {
+            method: "POST",
+          }
+        );
+        const responsePartner = await fetch(
+          `https://api.htilssu.com/api/v1/partner/all`,
+          {
+            method: "GET",
+            headers: {
+              "X-Api": partner.apiKey,
+            },
+          }
+        );
+        const data = await responseOrder.json();
+        const dataPartner = await responsePartner.json();
+        setThanhtoan(data.partNerRequest || {});
+        setPartner(dataPartner || {});
+        // console.log(data.partNerRequest);
+        // console.log(dataPartner);
+      } catch {
+        console.error("Error fetching data");
+      }
+    })();
+  }, [orderId]);
+
   const requestPayment = async (
     money,
     voucherId,
@@ -45,43 +76,12 @@ export default function Testing() {
         throw new Error("Network response was not ok");
       }
       const result = await res.json();
-      window.open(`https://htilssu.com/servicepayment/${result.id}`);
+      window.location.href = `https://htilssu.com/servicepayment/${result.id}`;
+      // window.open(`https://htilssu.com/servicepayment/${result.id}`);
     } catch (error) {
       console.error("Error fetching data", error);
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const responseOrder = await fetch(
-          `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/${orderId}`,
-          // `https://voucher-server-alpha.vercel.app/api/vouchers/getPartNerRequestByOrderId/ABC445`,
-          {
-            method: "POST",
-          }
-        );
-        const responsePartner = await fetch(
-          `https://api.htilssu.com/api/v1/partner/all`,
-          {
-            method: "GET",
-            headers: {
-              "X-Api":
-                "088ceabd98a514383c78e153c1442165a92600c4366580eb377791b5ff4b622a",
-            },
-          }
-        );
-        const data = await responseOrder.json();
-        const dataPartner = await responsePartner.json();
-        setThanhtoan(data.partNerRequest || {});
-        setPartner(dataPartner || {});
-        // console.log(data.partNerRequest);
-        // console.log(dataPartner);
-      } catch {
-        console.error("Error fetching data");
-      }
-    })();
-  }, [orderId]);
 
   const calculateTotal = () => {
     const total = thanhtoan.TotalMoney || 0;
@@ -104,11 +104,13 @@ export default function Testing() {
           </div>
           <div className="col-span-3 text-xl text-slate-500">Nhà cung cấp:</div>
           <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
-            {partner.map((item) => {
-              if (item.id === thanhtoan.PartnerID) {
-                return item.name.toUpperCase();
-              }
-            })}
+            {() => {
+              partner.map((item) => {
+                if (item.id === thanhtoan.PartnerID) {
+                  return item.name.toUpperCase();
+                }
+              });
+            }}
           </div>
           <div className="col-span-3 text-xl text-slate-500">Tên dịch vụ:</div>
           <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
