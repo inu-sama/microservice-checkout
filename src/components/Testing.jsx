@@ -8,6 +8,7 @@ export default function Testing() {
   const [partner, setPartner] = useState([]);
   const [discount, setDiscount] = useState(0);
   const [voucher, setVoucher] = useState([]);
+  const [request, setRequest] = useState([]);
   const orderId = searchParams.get("OrderID") || "";
   // const partnerId = searchParams.get("PartnerID") || "";
 
@@ -44,7 +45,7 @@ export default function Testing() {
         throw new Error("Network response was not ok");
       }
       const result = await res.json();
-      setVoucher((e) => result);
+      setRequest((e) => result);
     } catch (error) {
       console.error("Error fetching data", error);
     }
@@ -166,15 +167,15 @@ export default function Testing() {
           onClick={() => {
             requestPayment(
               thanhtoan.TotalMoney,
-              "",
-              "",
-              discount,
+              voucher.VoucherID,
+              voucher.VoucherName,
+              discount * thanhtoan.TotalMoney,
               thanhtoan.LinkReturnSuccess,
               thanhtoan.LinkHome,
               orderId,
               thanhtoan.ServiceName
             );
-            window.open(`https://htilssu.com/servicepayment/${voucher.id}`);
+            window.open(`https://htilssu.com/servicepayment/${request.id}`);
           }}
           className="w-2/3 mb-12 bg-pink-300 border-4 border-pink-300 shadow-inner hover:bg-white shadow-pink-300 text-white hover:text-pink-300 font-bold py-2 px-8 text-xl rounded-lg"
         >
