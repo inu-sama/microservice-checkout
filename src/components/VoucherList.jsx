@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 export default function VoucherList(props) {
   const [voucher, setVoucher] = useState([]);
   const [selection, setSelection] = useState();
-  // setSelection(null);
 
   useEffect(() => {
     (async () => {
