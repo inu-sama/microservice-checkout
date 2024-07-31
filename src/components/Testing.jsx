@@ -7,8 +7,48 @@ export default function Testing() {
   const [thanhtoan, setThanhtoan] = useState({});
   const [partner, setPartner] = useState([]);
   const [discount, setDiscount] = useState(0);
+  const [voucher, setVoucher] = useState([]);
   const orderId = searchParams.get("OrderID") || "";
   // const partnerId = searchParams.get("PartnerID") || "";
+
+  const requestPayment = async (
+    money,
+    voucherId,
+    voucherName,
+    voucherDiscount,
+    success,
+    returnUrl,
+    orderId,
+    serviceName
+  ) => {
+    try {
+      const res = await fetch("https://api.htilssu.com/api/v1/prequest", {
+        method: "POST",
+        headers: {
+          "X-Api":
+            "088ceabd98a514383c78e153c1442165a92600c4366580eb377791b5ff4b622a",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          money: money,
+          voucherId: voucherId,
+          voucherName: voucherName,
+          voucherDiscount: voucherDiscount,
+          success: success,
+          returnUrl: returnUrl,
+          orderId: orderId,
+          serviceName: serviceName,
+        }),
+      });
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const result = await res.json();
+      setVoucher(result || []);
+    } catch (error) {
+      console.error("Error fetching data", error);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -34,8 +74,8 @@ export default function Testing() {
         const dataPartner = await responsePartner.json();
         setThanhtoan(data.partNerRequest || {});
         setPartner(dataPartner || {});
-        console.log(data.partNerRequest);
-        console.log(dataPartner);
+        // console.log(data.partNerRequest);
+        // console.log(dataPartner);
       } catch {
         console.error("Error fetching data");
       }
@@ -85,13 +125,17 @@ export default function Testing() {
           <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
             {thanhtoan.CustomerName}
           </div>
-          <div className="col-span-3 text-xl text-slate-500">Mô tả: </div>
+          <div className="col-span-3 text-xl text-slate-500">Mô tả:</div>
           <div className="col-span-9 text-xl px-2 overflow-scroll scrollbar-hide">
             {thanhtoan.Description}
           </div>
         </div>
         <div className="py-4 shadow-md shadow-pink-300 mx-2 px-4 mt-12 rounded-md">
-          <VoucherList setDiscount={setDiscount} />
+          <VoucherList
+            setDiscount={setDiscount}
+            setVoucher={setVoucher}
+            id={partner.id}
+          />
         </div>
         <p className="text-left p-4 text-2xl font-bold text-pink-300 mt-12">
           Bảng thanh toán
@@ -118,7 +162,22 @@ export default function Testing() {
         </div>
       </div>
       <div className="text-center mt-4">
-        <button className="w-2/3 mb-12 bg-pink-300 border-4 border-pink-300 shadow-inner hover:bg-white shadow-pink-300 text-white hover:text-pink-300 font-bold py-2 px-8 text-xl rounded-lg">
+        <button
+          onClick={() => {
+            requestPayment(
+              thanhtoan.TotalMoney,
+              "",
+              "",
+              discount,
+              thanhtoan.LinkReturnSuccess,
+              thanhtoan.LinkHome,
+              orderId,
+              thanhtoan.ServiceName
+            );
+            window.open(`https://htilssu.com/servicepayment/${voucher.id}`);
+          }}
+          className="w-2/3 mb-12 bg-pink-300 border-4 border-pink-300 shadow-inner hover:bg-white shadow-pink-300 text-white hover:text-pink-300 font-bold py-2 px-8 text-xl rounded-lg"
+        >
           Thanh toán
         </button>
       </div>

@@ -27,6 +27,7 @@ export default function VoucherList(props) {
   const handleVoucherClick = (item) => {
     setSelection(item);
     props.setDiscount(item.VoucherDiscount);
+    props.setVoucher(item);
   };
 
   const formatDate = (dateString) => {
@@ -45,34 +46,42 @@ export default function VoucherList(props) {
           Chọn voucher
         </summary>
         <ul className="absolute top-9 menu dropdown-content shadow-lg shadow-pink-300 bg-white rounded-box z-[99] w-full rounded-b-md h-[50vh] overflow-y-scroll scrollbar-hide">
-          {voucher.map((item) => (
-            <li key={item._id}>
-              <div
-                className="group grid grid-cols-12 text-slate-500 hover:bg-pink-200 hover:text-white cursor-pointer place-items-center px-16"
-                onClick={() => handleVoucherClick(item)}
-              >
-                <div className="col-span-3 p-2">
-                  <img
-                    src={item.VoucherImage}
-                    alt=""
-                    className="img-fluid rounded h-20"
-                  />
-                </div>
-                <div className="col-span-1"></div>
-                <div className="col-span-8 border-3 border-black justify-self-start">
-                  <p className="font-bold text-pink-400 text-lg group-hover:text-white">
-                    {item.VoucherName}
-                  </p>
-                  <p className="text-sm">{formatDate(item.VoucherEndDate)}</p>
-                  <p>
-                    Giảm {item.VoucherDiscount}% cho đơn từ{" "}
-                    {item.VoucherMinValue}
-                  </p>
-                  <p>Tối đa {item.VoucherMaxValue}</p>
-                </div>
-              </div>
-            </li>
-          ))}
+          {voucher.map((item) => {
+            // console.log(item.VoucherCreateBy);
+            // console.log(props.id);
+            if (item.VoucherCreateBy == props.id) {
+              return (
+                <li key={item._id}>
+                  <div
+                    className="group grid grid-cols-12 text-slate-500 hover:bg-pink-200 hover:text-white cursor-pointer place-items-center px-16"
+                    onClick={() => handleVoucherClick(item)}
+                  >
+                    <div className="col-span-3 p-2">
+                      <img
+                        src={item.VoucherImage}
+                        alt=""
+                        className="img-fluid rounded h-20"
+                      />
+                    </div>
+                    <div className="col-span-1"></div>
+                    <div className="col-span-8 border-3 border-black justify-self-start">
+                      <p className="font-bold text-pink-400 text-lg group-hover:text-white">
+                        {item.VoucherName}
+                      </p>
+                      <p className="text-sm">
+                        {formatDate(item.VoucherEndDate)}
+                      </p>
+                      <p>
+                        Giảm {item.VoucherDiscount}% cho đơn từ{" "}
+                        {item.VoucherMinValue}
+                      </p>
+                      <p>Tối đa {item.VoucherMaxValue}</p>
+                    </div>
+                  </div>
+                </li>
+              );
+            }
+          })}
         </ul>
       </details>
       <p className="text-left p-4 text-2xl text-pink-300 mt-12text-left my-1 font-bold">
@@ -80,15 +89,15 @@ export default function VoucherList(props) {
       </p>
       {selection ? (
         <div className="grid grid-cols-12 cursor-pointer mt-2 mb-10 text-slate-500">
-          <div className="col-span-3 p-2">
+          <div className="col-span-3 h-40">
             <img
               src={selection.VoucherImage}
               alt=""
-              className="img-fluid rounded-lg h-40"
+              className="img-fluid rounded-lg"
             />
           </div>
-          {/* <div className="col-span-1"></div> */}
-          <div className="col-span-8 border-3 border-black text-left">
+          <div className="col-span-1"></div>
+          <div className="col-span-7 border-3 border-black text-left">
             <p className="font-bold text-3xl text-pink-300 mb-2">
               {selection.VoucherName}
             </p>
