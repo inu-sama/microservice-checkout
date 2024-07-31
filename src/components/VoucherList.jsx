@@ -46,9 +46,9 @@ export default function VoucherList(props) {
         </summary>
         <ul className="absolute top-9 menu dropdown-content shadow-lg shadow-pink-300 bg-white rounded-box z-[99] w-full rounded-b-md h-[50vh] overflow-y-scroll scrollbar-hide">
           {voucher.map((item) => {
-            // console.log(item.VoucherCreateBy);
+            // console.log(item.VoucherCreatedBy);
             // console.log(props.id);
-            if (item.VoucherCreateBy == props.id) {
+            if (item.VoucherCreatedBy == props.id) {
               return (
                 <li key={item._id}>
                   <div

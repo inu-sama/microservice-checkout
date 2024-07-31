@@ -3,6 +3,7 @@ import VoucherList from "./VoucherList";
 import { useSearchParams } from "react-router-dom";
 
 export default function Testing() {
+  let id;
   const [searchParams] = useSearchParams();
   const [thanhtoan, setThanhtoan] = useState({});
   const [partner, setPartner] = useState([]);
@@ -94,7 +95,7 @@ export default function Testing() {
       <h1 className="text-4xl text-center text-white font-bold my-12">
         THANH TOÁN
       </h1>
-      <div className="bg-white p-6 mb-6 w-full mt-4 mx-auto rounded-xl ">
+      <div className="bg-white p-6 mb-6 w-full mt-4 mx-auto rounded-xl">
         <p className="text-left p-4 text-2xl font-bold text-pink-300">
           Thông tin đơn hàng
         </p>
@@ -106,7 +107,8 @@ export default function Testing() {
           <div className="col-span-3 text-xl text-slate-500">Nhà cung cấp:</div>
           <div className="col-span-3 text-xl px-2 overflow-scroll scrollbar-hide">
             {partner.map((item) => {
-              if (item.id === thanhtoan.PartnerID) {
+              if (thanhtoan.PartnerID == item.id) {
+                id = item.id;
                 return item.name.toUpperCase();
               }
             })}
@@ -136,7 +138,7 @@ export default function Testing() {
           <VoucherList
             setDiscount={setDiscount}
             setVoucher={setVoucher}
-            id={partner.id}
+            id={id}
           />
         </div>
         <p className="text-left p-4 text-2xl font-bold text-pink-300 mt-12">
