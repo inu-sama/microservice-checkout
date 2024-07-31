@@ -76,8 +76,8 @@ export default function Testing() {
         throw new Error("Network response was not ok");
       }
       const result = await res.json();
-      window.location.href = `https://htilssu.com/servicepayment/${result.id}`;
-      // window.open(`https://htilssu.com/servicepayment/${result.id}`);
+      // window.location.href = `https://htilssu.com/servicepayment/${result.id}`;
+      window.open(`https://htilssu.com/servicepayment/${result.id}`);
     } catch (error) {
       console.error("Error fetching data", error);
     }
@@ -167,10 +167,11 @@ export default function Testing() {
       <div className="text-center mt-4">
         <button
           onClick={() => {
+            console.log(voucher);
             requestPayment(
               thanhtoan.TotalMoney,
-              voucher == {} ? voucher.VoucherID : "",
-              voucher == {} ? voucher.VoucherName : "",
+              voucher != {} ? voucher.VoucherID : "",
+              voucher != {} ? voucher.VoucherName : "",
               (discount * thanhtoan.TotalMoney) / 100,
               thanhtoan.LinkReturnSuccess,
               thanhtoan.LinkHome,
