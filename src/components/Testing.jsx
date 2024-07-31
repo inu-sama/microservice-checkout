@@ -7,7 +7,7 @@ export default function Testing() {
   const [thanhtoan, setThanhtoan] = useState({});
   const [partner, setPartner] = useState([]);
   const [discount, setDiscount] = useState(0);
-  const [voucher, setVoucher] = useState({});
+  const [voucher, setVoucher] = useState(null);
   const [request, setRequest] = useState({});
   const orderId = searchParams.get("OrderID") || "";
   // const partnerId = searchParams.get("PartnerID") || "";
@@ -170,8 +170,8 @@ export default function Testing() {
             console.log(voucher);
             requestPayment(
               thanhtoan.TotalMoney,
-              voucher != {} ? voucher.VoucherID : "",
-              voucher != {} ? voucher.VoucherName : "",
+              voucher ? voucher.VoucherID : "",
+              voucher ? voucher.VoucherName : "",
               (discount * thanhtoan.TotalMoney) / 100,
               thanhtoan.LinkReturnSuccess,
               thanhtoan.LinkHome,
